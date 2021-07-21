@@ -1,14 +1,21 @@
 import basededatos from './basededatos.js';
 
 const directores = basededatos.directores
-const pelis = basededatos.peliculas
+const peliculas = basededatos.peliculas
+const calificaciones = basededatos.calificaciones
+const paises = basededatos.paises
+const generos = basededatos.generos
+const criticos = basededatos.criticos
+
+
 /**
 * Devuelve el promedio de anios de estreno de todas las peliculas de la base de datos.
 */
 export const promedioAnioEstreno = () => {
-    // Ejemplo de como accedo a datos dentro de la base de datos
-    // console.log(basededatos.peliculas);
-    return [];
+    const totalAnios = basededatos.peliculas.reduce((total, peliculas) => {
+        return total + peliculas.anio
+    }, 0)
+    return totalAnios / peliculas.length
 };
 
 /**
@@ -18,7 +25,15 @@ export const promedioAnioEstreno = () => {
   */
 export const pelicuasConCriticaPromedioMayorA = (promedio) => {
     // reduce por grupo, reduce por acumulador/promedio y filter
-    return [];
+    // const peliculas = []
+    // const calificaciones = basededatos.calificaciones
+    // calificaciones.forEach(function(item){
+    //     if(item.puntuacion > promedio){
+    //         peliculas.push(item.pelicula)
+    //     }
+    // })
+
+    // return peliculas;
 };
 
 /**
@@ -27,7 +42,7 @@ export const pelicuasConCriticaPromedioMayorA = (promedio) => {
 */
 export const peliculasDeUnDirector = (nombreDirector) => {
     const director = directores.find(director => director.nombre === nombreDirector)
-    return pelis.filter(peli => peli.directores.includes(director.id))
+    return peliculas.filter(peli => peli.directores.includes(director.id))
 };
 
 /**
@@ -35,7 +50,8 @@ export const peliculasDeUnDirector = (nombreDirector) => {
 * @param {number} peliculaId
 */
 export const promedioDeCriticaBypeliculaId = (peliculaId) => {
-    return [];
+    let sumaPuntaje = calificaciones.filter(criticas => criticas.pelicula == peliculaId).reduce((total, criticas) => (total + criticas.puntuacion), 0);
+    return sumaPuntaje / calificaciones.filter(criticas => criticas.pelicula == peliculaId).length
 };
 
 /**
