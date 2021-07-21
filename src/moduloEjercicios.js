@@ -1,6 +1,7 @@
 import basededatos from './basededatos.js';
 
-
+const directores = basededatos.directores
+const pelis = basededatos.peliculas
 /**
 * Devuelve el promedio de anios de estreno de todas las peliculas de la base de datos.
 */
@@ -16,6 +17,7 @@ export const promedioAnioEstreno = () => {
 * @param {number} promedio
   */
 export const pelicuasConCriticaPromedioMayorA = (promedio) => {
+    // reduce por grupo, reduce por acumulador/promedio y filter
     return [];
 };
 
@@ -24,7 +26,8 @@ export const pelicuasConCriticaPromedioMayorA = (promedio) => {
 * @param {string} nombreDirector
 */
 export const peliculasDeUnDirector = (nombreDirector) => {
-    return [];
+    const director = directores.find(director => director.nombre === nombreDirector)
+    return pelis.filter(peli => peli.directores.includes(director.id))
 };
 
 /**
